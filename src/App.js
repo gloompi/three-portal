@@ -13,7 +13,7 @@ export default function App() {
   return (
     <>
       <Leva collapsed />
-      <Canvas>
+      <Canvas camera={{ position: [3.2, 1.8, 2.3] }}>
         <color attach="background" args={[backgroundColor]} />
         <CameraController />
         <FireFlies />
