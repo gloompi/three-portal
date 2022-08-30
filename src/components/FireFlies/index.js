@@ -20,7 +20,7 @@ const FireFlies = ({ count = 30 }) => {
     return new BufferAttribute(new Float32Array(p), 3);
   }, [count]);
 
-  useFrame((state, delta) => (sparklesMaterial.current.uTime += delta));
+  useFrame((_, delta) => (sparklesMaterial.current.uTime += delta));
 
   return (
     <points>
@@ -29,10 +29,7 @@ const FireFlies = ({ count = 30 }) => {
       </bufferGeometry>
       <sparklesMaterial
         ref={sparklesMaterial}
-        size={0.1}
-        threshold={0.1}
-        color={0xff00ff}
-        sizeAttenuation={true}
+        uPixelRatio={Math.min(window.devicePixelRatio, 2)}
       />
     </points>
   );
@@ -42,6 +39,7 @@ extend({
   SparklesMaterial: shaderMaterial(
     {
       uTime: 0,
+      uPixelRatio: Math.min(window.devicePixelRatio, 2),
     },
     vertex,
     fragment
